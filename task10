@@ -1,0 +1,44 @@
+import turtle
+import random
+
+screen = turtle.Screen()
+screen.bgcolor("white")
+
+pen = turtle.Turtle()
+pen.color("green")
+pen.speed(0)
+pen.left(90)
+
+def randomfractaltree(n, length, angle, scale):
+    if n == 0:
+        return
+
+    pen.forward(length)
+
+    random_angle = angle + random.randint(-10, 10)
+    random_scale = scale * (0.8 + random.random() * 0.4)
+
+    pen.left(random_angle)
+    randomfractaltree(n - 1, length * random_scale, angle, scale)
+
+    pen.right(2 * random_angle)
+    randomfractaltree(n - 1, length * random_scale, angle, scale)
+
+    pen.left(random_angle)
+    pen.backward(length)
+
+print("=== RANDOM FRACTAL TREE MENU ===")
+
+n = int(input("Enter level (n): "))
+length = float(input("Enter branch length: "))
+angle = float(input("Enter base angle: "))
+scale = float(input("Enter base scale: "))
+
+print("n =", n)
+print("length =", length)
+print("angle =", angle)
+print("scale =", scale)
+
+randomfractaltree(n, length, angle, scale)
+
+turtle.done()

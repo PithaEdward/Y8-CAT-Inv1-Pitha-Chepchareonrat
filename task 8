@@ -1,0 +1,42 @@
+import turtle
+
+screen = turtle.Screen()
+screen.bgcolor("white")
+
+pen = turtle.Turtle()
+pen.color("green")
+pen.speed(0)
+pen.left(90)
+
+def fractaltree(n, length, angle, scale):
+    if n == 0:
+        return
+
+    pen.forward(length)
+
+    pen.left(angle)
+    fractaltree(n - 1, length * scale, angle, scale)
+
+    pen.right(2 * angle)
+    fractaltree(n - 1, length * scale, angle, scale)
+
+    pen.left(angle)
+    pen.backward(length)
+
+
+# values
+n = 9
+length = 120
+angle = 18
+scale = 0.75
+
+# print settings
+print("Tree settings:")
+print("n =", n)
+print("length =", length)
+print("angle =", angle)
+print("scale =", scale)
+
+fractaltree(n, length, angle, scale)
+
+turtle.done()

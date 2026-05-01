@@ -1,0 +1,50 @@
+import turtle
+import random
+
+screen = turtle.Screen()
+screen.bgcolor("white")
+
+pen = turtle.Turtle()
+pen.speed(0)
+pen.left(90)
+
+def realistic_tree(n, length, angle, scale, thickness):
+    if n == 0:
+        pen.penup()
+        pen.color("green")
+        pen.dot(10)
+        pen.pendown()
+        return
+
+    pen.color("brown")
+    pen.pensize(thickness)
+
+    pen.forward(length)
+
+    random_angle = angle + random.randint(-15, 15)
+    random_scale = scale * (0.7 + random.random() * 0.6)
+    new_thickness = max(1, thickness - 1)
+
+    pen.left(random_angle)
+    realistic_tree(n - 1, length * random_scale, angle, scale, new_thickness)
+
+    pen.right(2 * random_angle)
+    realistic_tree(n - 1, length * random_scale, angle, scale, new_thickness)
+
+    pen.left(random_angle)
+
+    pen.penup()
+    pen.backward(length)
+    pen.pendown()
+
+print("=== REALISTIC TREE MENU ===")
+
+n = int(input("Enter level (n): "))
+length = float(input("Enter branch length: "))
+angle = float(input("Enter branch angle: "))
+scale = float(input("Enter scale factor: "))
+thickness = int(input("Enter starting thickness: "))
+
+realistic_tree(n, length, angle, scale, thickness)
+
+turtle.done()
